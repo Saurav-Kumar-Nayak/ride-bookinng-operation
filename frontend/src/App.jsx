@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import API_BASE from './config';
 import KPICards from './components/KPICards';
 import HourlyChart from './components/HourlyChart';
 import OutcomeDonut from './components/OutcomeDonut';
@@ -110,7 +111,7 @@ export default function App() {
     if (!editingBooking) return;
     
     try {
-      const res = await fetch(`/api/bookings/${editingBooking._id}`, {
+      const res = await fetch(`${API_BASE}/api/bookings/${editingBooking._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -147,7 +148,7 @@ export default function App() {
         query = '?' + params.join('&');
       }
 
-      const res = await fetch(`/api/bookings/stats${query}`);
+      const res = await fetch(`${API_BASE}/api/bookings/stats${query}`);
       if (!res.ok) throw new Error('Stats retrieval failed');
       const data = await res.json();
       setStats(data);
@@ -166,7 +167,7 @@ export default function App() {
       if (startDate) query += `&startDate=${startDate}`;
       if (endDate) query += `&endDate=${endDate}`;
 
-      const res = await fetch(`/api/bookings${query}`);
+      const res = await fetch(`${API_BASE}/api/bookings${query}`);
       if (!res.ok) throw new Error('Bookings list fetch failed');
       const data = await res.json();
       
@@ -202,7 +203,7 @@ export default function App() {
   const handleDeleteBooking = async (id) => {
     if (!confirm('Are you sure you want to delete this booking record?')) return;
     try {
-      const res = await fetch(`/api/bookings/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/api/bookings/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Deletion failed');
       // Refresh
       fetchStats();
@@ -218,7 +219,7 @@ export default function App() {
     setIsSeeding(true);
     setIsLoading(true);
     try {
-      const res = await fetch('/api/bookings/seed', {
+      const res = await fetch(`${API_BASE}/api/bookings/seed`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ count })

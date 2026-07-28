@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import API_BASE from '../config';
 
 const pickupLocationsList = [
   'Connaught Place', 'Karol Bagh', 'Saket', 'Badarpur', 'Pragati Maidan', 
@@ -105,7 +106,7 @@ export default function BookingSimulator({ onSimulateComplete }) {
     setLogs(['Initializing...']);
 
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch(`${API_BASE}/api/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
