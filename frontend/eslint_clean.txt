@@ -1,0 +1,19 @@
+src\App.jsx
+    1:8   error    'React' is defined but never used                                                                                                        no-unused-vars
+  189:6   warning  React Hook useEffect has a missing dependency: 'fetchBookingsList'. Either include it or remove the dependency array                     react-hooks/exhaustive-deps
+  199:6   warning  React Hook useEffect has missing dependencies: 'fetchBookingsList' and 'fetchStats'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+src\components\BarList.jsx
+  1:8   error  'React' is defined but never used             no-unused-vars
+src\components\BookingSimulator.jsx
+   1:8   error    'React' is defined but never used                                                                                                                                                                                                                                no-unused-vars
+  38:16  warning  The ref value 'timerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'timerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+  74:32  error    'index' is defined but never used                                                                                                                                                                                                                                no-unused-vars
+src\components\BookingsTable.jsx
+    1:8   error  'React' is defined but never used                       no-unused-vars
+src\components\HourlyChart.jsx
+  1:8   error  'React' is defined but never used               no-unused-vars
+src\components\KPICards.jsx
+   1:8   error  'React' is defined but never used                         no-unused-vars
+src\components\OutcomeDonut.jsx
+   1:8   error  'React' is defined but never used                 no-unused-vars
+Γ£û 55 problems (52 errors, 3 warnings)
