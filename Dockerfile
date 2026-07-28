@@ -17,7 +17,6 @@ COPY models/ ./models
 COPY routes/ ./routes
 COPY utils/ ./utils
 COPY server.js ./
-COPY .env ./
 
 # Copy built frontend assets to runtime placement
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
