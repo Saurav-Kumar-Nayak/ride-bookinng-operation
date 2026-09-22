@@ -173,9 +173,15 @@ export default function BookRidePage() {
       sessionStorage.setItem('destLocation', dAddr);
 
       // Async background save to backend (if available)
+      const token = localStorage.getItem('token') || localStorage.getItem('ridex_token') || localStorage.getItem('riidex_token');
+      const riderName = localStorage.getItem('ridex_user_name') || 'Passenger';
+      const riderPhone = localStorage.getItem('ridex_user_phone') || '';
+      const reqHeaders = { 'Content-Type': 'application/json' };
+      if (token) reqHeaders['Authorization'] = `Bearer ${token}`;
+
       fetch(`${API_BASE}/api/bookings`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: reqHeaders,
         body: JSON.stringify({
           bookingId,
           pickupLocation: pAddr,
@@ -185,7 +191,9 @@ export default function BookRidePage() {
           fare: finalTotalFare,
           rawFare: finalTotalFare,
           distance: cleanDistance,
-          status: 'Confirmed'
+          status: 'Confirmed',
+          riderName,
+          riderPhone
         })
       }).catch(e => console.warn('Background booking save:', e));
 

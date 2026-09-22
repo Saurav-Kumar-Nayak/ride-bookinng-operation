@@ -350,7 +350,15 @@ exports.updateBooking = async (req, res) => {
     const { id } = req.params;
     const { status, driverRating, customerRating, driverCancellationReason, custCancellationReason } = req.body;
 
-    const booking = await Booking.findById(id);
+    const isValidObjectId = (val) => typeof val === 'string' && /^[0-9a-fA-F]{24}$/.test(val);
+    
+    let booking = await Booking.findOne({
+      $or: [
+        { bookingId: id },
+        ...(isValidObjectId(id) ? [{ _id: id }] : [])
+      ]
+    });
+
     if (!booking) {
       return res.status(404).json({ message: 'Booking not found.' });
     }
@@ -386,7 +394,13 @@ exports.updateBooking = async (req, res) => {
 exports.deleteBooking = async (req, res) => {
   try {
     const { id } = req.params;
-    const booking = await Booking.findByIdAndDelete(id);
+    const isValidObjectId = (val) => typeof val === 'string' && /^[0-9a-fA-F]{24}$/.test(val);
+    const booking = await Booking.findOneAndDelete({
+      $or: [
+        { bookingId: id },
+        ...(isValidObjectId(id) ? [{ _id: id }] : [])
+      ]
+    });
     if (!booking) {
       return res.status(404).json({ message: 'Booking not found.' });
     }

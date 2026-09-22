@@ -33,7 +33,7 @@ import GoogleLiveLocationPage from './pages/passenger/GoogleLiveLocationPage.jsx
 
 function ProtectedRoute({ children }) {
   const { isLoaded, isSignedIn } = useUser();
-  const hasLocalSession = !!localStorage.getItem('riidex_token') || !!localStorage.getItem('ridex_user_name');
+  const hasLocalSession = !!localStorage.getItem('token') || !!localStorage.getItem('ridex_token') || !!localStorage.getItem('riidex_token') || !!localStorage.getItem('ridex_user_name') || !!localStorage.getItem('ridex_user_phone');
 
   if (!isLoaded) {
     return (
