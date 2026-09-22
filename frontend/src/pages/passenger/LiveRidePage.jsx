@@ -59,11 +59,17 @@ export default function LiveRidePage() {
     try {
       const activeBookingId = sessionStorage.getItem('ridex_booking_id') || 'BK_8921';
       const riderName = localStorage.getItem('ridex_user_name') || 'Saurav Kumar Nayak';
+      const userToken = localStorage.getItem('token') || localStorage.getItem('ridex_token') || localStorage.getItem('driverToken');
+
+      const headers = { 'Content-Type': 'application/json' };
+      if (userToken) {
+        headers['Authorization'] = `Bearer ${userToken}`;
+      }
 
       // Send feedback to Backend API
       const res = await fetch(`${API_BASE}/api/bookings/${activeBookingId}/feedback`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
           rating: userRating,
           comment: riderComment,
@@ -74,8 +80,8 @@ export default function LiveRidePage() {
       });
 
       const data = await res.json();
-      if (!data.success && data.message && !data.message.includes('already')) {
-        setFeedbackError(data.message);
+      if (!res.ok || (!data.success && !data.message?.includes('already'))) {
+        setFeedbackError(data.message || 'Unable to submit feedback. Please try again.');
         setIsSubmittingFeedback(false);
         return;
       }
@@ -115,10 +121,7 @@ export default function LiveRidePage() {
 
     } catch (e) {
       console.warn('Backend feedback notice:', e.message);
-      setFeedbackSubmitted(true);
-      setTimeout(() => {
-        navigate('/payment');
-      }, 2000);
+      setFeedbackError('Unable to connect to feedback server. Please try again.');
     } finally {
       setIsSubmittingFeedback(false);
     }
