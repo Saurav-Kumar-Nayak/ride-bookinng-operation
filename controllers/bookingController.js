@@ -533,11 +533,15 @@ exports.submitRideFeedback = async (req, res) => {
       const defaultDriver = await User.findOne({ role: 'driver' });
       booking = await Booking.create({
         bookingId: id || 'BK_' + Math.floor(1000 + Math.random() * 9000),
+        bookingDate: new Date(),
+        bookingTime: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
         passengerName: riderName || 'Saurav Kumar Nayak',
         pickupLocation: 'Koramangala 5th Block',
         dropLocation: 'Indiranagar 100ft Road',
         vehicleType: 'Go Sedan',
         fare: 250,
+        distance: 5.2,
+        paymentMethod: 'UPI',
         status: 'Completed',
         driverId: defaultDriver ? defaultDriver._id : null,
         driverName: defaultDriver ? defaultDriver.name : 'Vikram Singh',
