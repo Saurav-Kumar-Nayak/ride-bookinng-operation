@@ -747,18 +747,19 @@ export default function LiveRidePage() {
       {/* ── Uber Ride Completed Celebration Modal ── */}
       {showCompletedModal && (
         <div style={{
-          position: 'absolute', inset: 0, zIndex: 100,
-          background: 'rgba(5, 7, 12, 0.95)', backdropFilter: 'blur(20px)',
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: 'rgba(5, 7, 12, 0.92)', backdropFilter: 'blur(20px)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          padding: 20, animation: 'fadeIn 0.4s ease'
+          padding: '20px 16px', overflowY: 'auto', animation: 'fadeIn 0.4s ease'
         }}>
           <div style={{
-            width: '100%', maxWidth: 420,
+            width: '100%', maxWidth: 440, maxHeight: '90vh', overflowY: 'auto',
             background: 'linear-gradient(145deg, #131824 0%, #0b0e18 100%)',
-            border: '2px solid rgba(0, 237, 255, 0.5)', borderRadius: 32,
-            padding: '32px 24px', textAlign: 'center',
-            boxShadow: '0 25px 60px rgba(0,237,255,0.3)',
-            animation: 'scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)'
+            border: '2px solid rgba(0, 237, 255, 0.5)', borderRadius: 28,
+            padding: '28px 22px', textAlign: 'center',
+            boxShadow: '0 25px 60px rgba(0,237,255,0.4)',
+            animation: 'scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            boxSizing: 'border-box'
           }}>
             {/* Animated Check Circle */}
             <div style={{
