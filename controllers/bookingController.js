@@ -1,4 +1,7 @@
 const Booking = require('../models/Booking');
+const Notification = require('../models/Notification');
+const Feedback = require('../models/Feedback');
+const User = require('../models/User');
 const { generateRandomBooking } = require('../utils/seeder');
 
 // Get aggregated statistics for the dashboard
@@ -276,7 +279,7 @@ exports.getBookings = async (req, res) => {
 // Create a new booking (optionally triggers simulation outcomes)
 exports.createBooking = async (req, res) => {
   try {
-    const { pickupLocation, dropLocation, vehicleType, paymentMethod, simulate } = req.body;
+    const { pickupLocation, dropLocation, vehicleType, paymentMethod, fare, distance, status, simulate } = req.body;
 
     if (!pickupLocation || !dropLocation || !vehicleType || !paymentMethod) {
       return res.status(400).json({ message: 'Please provide all booking details.' });
@@ -296,35 +299,46 @@ exports.createBooking = async (req, res) => {
       bookingData.vehicleType = vehicleType;
       bookingData.paymentMethod = paymentMethod;
     } else {
-      // Manual creation with specific default status 'Completed' or custom
-      const bookingId = `BK_${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+      const bookingId = req.body.bookingId || `BK_${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
       const now = new Date();
       const pad = (n) => n.toString().padStart(2, '0');
       const bookingTime = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
       
-      const distance = parseFloat((Math.random() * 20 + 2).toFixed(2));
-      const fare = Math.round(50 + distance * 15);
+      const calcDistance = distance ? Number(distance) : parseFloat((Math.random() * 15 + 3).toFixed(2));
+      const calcFare = fare ? Number(fare) : Math.round(50 + calcDistance * 15);
 
       bookingData = {
         bookingId,
         bookingDate: now,
         bookingTime,
-        status: 'Completed',
+        status: status || 'Confirmed',
         vehicleType,
         pickupLocation,
         dropLocation,
-        fare,
-        distance,
+        fare: calcFare,
+        distance: calcDistance,
         paymentMethod,
-        driverRating: 4.5,
-        customerRating: 4.8
+        driverRating: null,
+        customerRating: null
       };
     }
 
     const booking = new Booking(bookingData);
     await booking.save();
 
-    res.status(201).json({ message: 'Booking created successfully', booking });
+    // Create real-time admin notification for new booking
+    try {
+      await Notification.create({
+        type: 'live_trip',
+        title: '⚡ New Ride Booking Created',
+        message: `Ride #${booking.bookingId} (${booking.vehicleType || 'Go Sedan'}) requested. Pickup: ${booking.pickupLocation || 'N/A'} → Drop: ${booking.dropLocation || 'N/A'}.`,
+        unread: true
+      });
+    } catch (notifErr) {
+      console.error('Failed to create booking notification:', notifErr);
+    }
+
+    res.status(201).json({ success: true, message: 'Booking created successfully', booking });
   } catch (error) {
     res.status(500).json({ message: 'Error creating booking', error: error.message });
   }
@@ -341,7 +355,21 @@ exports.updateBooking = async (req, res) => {
       return res.status(404).json({ message: 'Booking not found.' });
     }
 
-    if (status) booking.status = status;
+    if (status) {
+      booking.status = status;
+      // Create real-time notification on status change
+      const isCancellation = /^Cancelled/i.test(status);
+      try {
+        await Notification.create({
+          type: isCancellation ? 'ride_cancellation' : 'live_trip',
+          title: isCancellation ? '🚨 Ride Cancellation Alert' : '⚡ Ride Status Updated',
+          message: `Ride #${booking.bookingId} (${booking.vehicleType || 'Vehicle'}) status changed to ${status}.`,
+          unread: true
+        });
+      } catch (notifErr) {
+        console.error('Failed to create update notification:', notifErr);
+      }
+    }
     if (driverRating !== undefined) booking.driverRating = driverRating;
     if (customerRating !== undefined) booking.customerRating = customerRating;
     if (driverCancellationReason !== undefined) booking.driverCancellationReason = driverCancellationReason;
@@ -453,3 +481,152 @@ exports.exportBookings = async (req, res) => {
     res.status(500).json({ message: 'Error exporting bookings', error: error.message });
   }
 };
+
+/**
+ * POST /api/bookings/:id/feedback
+ * Submit rider feedback (rating + optional comment) for a completed ride
+ */
+exports.submitRideFeedback = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rating, comment, badges, tipAmount, riderName, riderAvatar, userId } = req.body || {};
+
+    // 1. Rating Validation (Required: integer 1-5)
+    const numericRating = Number(rating);
+    if (!rating || isNaN(numericRating) || numericRating < 1 || numericRating > 5) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide a valid rating between 1 and 5 stars.'
+      });
+    }
+
+    // 2. Comment Length & Sanitization Validation (Optional, max 500 chars)
+    let sanitizedComment = '';
+    if (comment !== undefined && comment !== null) {
+      const trimmedComment = String(comment).trim();
+      if (trimmedComment.length > 500) {
+        return res.status(400).json({
+          success: false,
+          message: 'Feedback comment cannot exceed 500 characters.'
+        });
+      }
+      // Simple HTML/script tag stripping
+      sanitizedComment = trimmedComment.replace(/<[^>]*>?/gm, '');
+    }
+
+    // 3. Retrieve Booking Record
+    const booking = await Booking.findOne({
+      $or: [
+        { _id: id },
+        { bookingId: id }
+      ]
+    });
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        message: 'Ride record not found.'
+      });
+    }
+
+    // 4. Verify Ride Completion Status
+    if (booking.status !== 'Completed') {
+      return res.status(400).json({
+        success: false,
+        message: 'Feedback can only be submitted for completed rides.'
+      });
+    }
+
+    // 5. Derive DriverId securely from the database booking record
+    let driverId = booking.driverId;
+    if (!driverId && booking.driverPhone) {
+      const driverUser = await User.findOne({ phone: { $regex: booking.driverPhone.replace(/\D/g, '').slice(-10) } });
+      if (driverUser) {
+        driverId = driverUser._id;
+      }
+    }
+    if (!driverId) {
+      const defaultDriver = await User.findOne({ role: 'driver' });
+      if (defaultDriver) {
+        driverId = defaultDriver._id;
+      }
+    }
+
+    if (!driverId) {
+      return res.status(400).json({
+        success: false,
+        message: 'No driver associated with this ride record.'
+      });
+    }
+
+    // 6. Prevent Duplicate Submissions for the same ride
+    const existingFeedback = await Feedback.findOne({
+      $or: [
+        { rideId: booking._id },
+        { rideId: booking.bookingId }
+      ]
+    });
+
+    if (existingFeedback) {
+      return res.status(400).json({
+        success: false,
+        message: 'Feedback has already been submitted for this completed ride.'
+      });
+    }
+
+    // 7. Determine Rider Name & Avatar
+    const finalRiderName = riderName || booking.passengerName || 'Saurav Kumar Nayak';
+
+    // 8. Create & Save Feedback Document
+    const newFeedback = await Feedback.create({
+      rideId: booking.bookingId || booking._id.toString(),
+      userId: userId || null,
+      riderName: finalRiderName,
+      riderAvatar: riderAvatar || '',
+      driverId: driverId.toString(),
+      rating: Math.round(numericRating),
+      comment: sanitizedComment,
+      badges: Array.isArray(badges) ? badges : [],
+      tipAmount: Number(tipAmount) || 0
+    });
+
+    // 9. Update Booking document
+    booking.driverRating = Math.round(numericRating);
+    booking.riderComment = sanitizedComment;
+    booking.feedbackId = newFeedback._id;
+    await booking.save();
+
+    // 10. Update Driver's overall average rating in User model
+    try {
+      const driverFeedbacks = await Feedback.find({ driverId: driverId.toString() });
+      if (driverFeedbacks.length > 0) {
+        const totalRatingSum = driverFeedbacks.reduce((acc, f) => acc + f.rating, 0);
+        const avgRating = parseFloat((totalRatingSum / driverFeedbacks.length).toFixed(1));
+
+        const driverUser = await User.findById(driverId);
+        if (driverUser) {
+          driverUser.rating = avgRating;
+          if (!driverUser.driverDetails) driverUser.driverDetails = {};
+          driverUser.driverDetails.rating = avgRating;
+          await driverUser.save();
+        }
+      }
+    } catch (rErr) {
+      console.warn('Notice updating driver overall rating:', rErr.message);
+    }
+
+    return res.status(201).json({
+      success: true,
+      message: 'Thanks for your feedback! Your feedback helps us improve RideX.',
+      feedback: newFeedback
+    });
+  } catch (error) {
+    console.error('submitRideFeedback error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to save feedback.',
+      error: error.message
+    });
+  }
+};
+

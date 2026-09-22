@@ -1,0 +1,387 @@
+/* ── UBER-STYLE PASSENGER HOME 3D STYLES ── */
+
+.home-page-3d-container {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #090a10;
+  color: #f8fafc;
+  padding-bottom: 110px;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+}
+
+/* 3D Hero Header Banner */
+.home-hero-3d {
+  background: linear-gradient(145deg, #0d111d 0%, #161b2e 50%, #090b14 100%);
+  padding: 50px 20px 90px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 237, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.home-hero-glow-3d {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 237, 255, 0.25) 0%, rgba(139, 92, 246, 0.18) 60%, transparent 100%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+/* Header User Row */
+.home-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.user-badge-3d {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar-ring-3d {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00edff, #3b82f6);
+  padding: 2.5px;
+  box-shadow: 0 0 20px rgba(0, 237, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-inner-3d {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #0d111d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.greeting-text-3d {
+  font-size: 13px;
+  color: #00edff;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.user-name-3d {
+  font-size: 22px;
+  font-weight: 900;
+  color: #f8fafc;
+  margin-top: 2px;
+  letter-spacing: -0.5px;
+}
+
+.header-icon-btn-3d {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(19, 24, 36, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 237, 255, 0.25);
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.header-icon-btn-3d:hover {
+  transform: translateY(-2px);
+  border-color: #00edff;
+  box-shadow: 0 8px 25px rgba(0, 237, 255, 0.3);
+}
+
+.notif-dot-3d {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 10px #ef4444;
+}
+
+/* Promo Ticket */
+.home-promo-banner-3d {
+  background: linear-gradient(135deg, rgba(0, 237, 255, 0.12) 0%, rgba(139, 92, 246, 0.12) 100%);
+  border: 1px solid rgba(0, 237, 255, 0.3);
+  border-radius: 20px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* 3D Floating Booking Card */
+.home-booking-card-3d {
+  margin: -65px 16px 24px;
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, rgba(19, 24, 36, 0.96) 0%, rgba(11, 14, 24, 0.98) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 237, 255, 0.15);
+  border: 1.5px solid rgba(0, 237, 255, 0.3);
+  padding: 24px;
+  animation: fadeInUp 0.5s ease;
+}
+
+.booking-header-3d {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.booking-badge-3d {
+  font-size: 11px;
+  font-weight: 900;
+  color: #00edff;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  background: rgba(0, 237, 255, 0.12);
+  border: 1px solid rgba(0, 237, 255, 0.3);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.input-container-3d {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.input-wrapper-3d {
+  position: relative;
+}
+
+.input-icon-3d {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  z-index: 2;
+}
+
+.home-input-3d {
+  width: 100%;
+  padding: 16px 44px 16px 48px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  font-size: 15px;
+  color: #f8fafc;
+  font-family: inherit;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.home-input-3d:focus {
+  border-color: #00edff;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 22px rgba(0, 237, 255, 0.35);
+}
+
+.clear-btn-3d {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.map-picker-btn-3d {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(0, 237, 255, 0.1);
+  border: 1px dashed rgba(0, 237, 255, 0.4);
+  border-radius: 16px;
+  color: #00edff;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.map-picker-btn-3d:hover {
+  background: rgba(0, 237, 255, 0.2);
+  border-color: #00edff;
+}
+
+/* Category Scroll Carousel */
+.home-section-3d {
+  padding: 0 20px 24px;
+}
+
+.section-title-3d {
+  font-size: 18px;
+  font-weight: 900;
+  color: #f8fafc;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-sub-3d {
+  font-size: 12px;
+  color: #00edff;
+  font-weight: 700;
+}
+
+.cat-scroll-wrapper-3d {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.cat-scroll-wrapper-3d::-webkit-scrollbar {
+  display: none;
+}
+
+.home-cat-chip-3d {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(19, 24, 36, 0.9) 0%, rgba(13, 17, 29, 0.95) 100%);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 16px 14px;
+  text-align: center;
+  cursor: pointer;
+  min-width: 90px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.home-cat-chip-3d.active {
+  background: linear-gradient(135deg, rgba(0, 237, 255, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+  border-color: #00edff;
+  transform: scale(1.06) translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 237, 255, 0.4);
+}
+
+/* Saved & Recent Grid */
+.saved-places-grid-3d {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.saved-place-card-3d {
+  background: rgba(19, 24, 36, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.saved-place-card-3d:hover {
+  border-color: #00edff;
+  background: rgba(0, 237, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.recent-list-3d {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recent-item-3d {
+  background: rgba(19, 24, 36, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.recent-item-3d:hover {
+  border-color: #00edff;
+  background: rgba(0, 237, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Bottom CTA Fixed Bar */
+.home-bottom-bar-3d {
+  position: fixed;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  padding: 0 16px;
+  z-index: 90;
+  box-sizing: border-box;
+}
+
+.home-book-btn-3d {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #00edff 0%, #3b82f6 50%, #8b5cf6 100%);
+  border: none;
+  border-radius: 22px;
+  color: #0f172a;
+  font-weight: 900;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 10px 35px rgba(0, 237, 255, 0.5);
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.home-book-btn-3d:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 237, 255, 0.7);
+  color: #ffffff;
+}

@@ -1,0 +1,444 @@
+/* ── UBER-STYLE ULTRA-STYLISH 3D DRIVER FLEET COMMAND CENTER STYLES ── */
+
+.drivers-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  animation: fadeInDrivers 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInDrivers {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Uber Fleet Command KPI Grid */
+.uber-fleet-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  perspective: 1000px;
+}
+
+.uber-kpi-card-3d {
+  background: linear-gradient(135deg, rgba(19, 24, 36, 0.95) 0%, rgba(11, 14, 24, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 18px 20px;
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.uber-kpi-card-3d:hover {
+  transform: translateY(-5px) rotateX(3deg) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 237, 255, 0.15);
+  border-color: rgba(0, 237, 255, 0.4);
+}
+
+.uber-kpi-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.uber-kpi-icon.cyan { background: linear-gradient(135deg, rgba(0, 237, 255, 0.25), rgba(3, 105, 161, 0.2)); color: #38bdf8; border: 1px solid rgba(0, 237, 255, 0.4); }
+.uber-kpi-icon.emerald { background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(4, 120, 87, 0.2)); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.uber-kpi-icon.orange { background: linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(194, 65, 12, 0.2)); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
+.uber-kpi-icon.purple { background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(109, 40, 217, 0.2)); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+
+.uber-kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+}
+
+.uber-kpi-value {
+  font-size: 22px;
+  font-weight: 900;
+  color: #f8fafc;
+  letter-spacing: -0.5px;
+  margin: 2px 0;
+}
+
+.uber-kpi-sub {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* View Mode Selector (Grid vs Table) */
+.uber-view-toggle {
+  display: flex;
+  gap: 6px;
+  background: rgba(19, 24, 36, 0.9);
+  backdrop-filter: blur(16px);
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.uber-toggle-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.uber-toggle-btn.active {
+  background: linear-gradient(135deg, #00edff, #3b82f6);
+  color: #0f172a;
+  box-shadow: 0 4px 14px rgba(0, 237, 255, 0.4);
+}
+
+/* 3D Holographic Uber Driver Cards Grid */
+.uber-driver-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  perspective: 1200px;
+}
+
+.uber-driver-card-3d {
+  background: linear-gradient(135deg, rgba(19, 24, 36, 0.94) 0%, rgba(11, 14, 24, 0.96) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+.uber-driver-card-3d:hover {
+  transform: translateY(-8px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 237, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-color: rgba(0, 237, 255, 0.45);
+}
+
+.uber-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uber-avatar-wrap {
+  position: relative;
+}
+
+.uber-avatar-3d {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #00edff, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #0f172a;
+  font-size: 20px;
+  box-shadow: 0 6px 18px rgba(0, 237, 255, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.uber-avatar-online-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid #0f172a;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.uber-driver-info h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: #f8fafc;
+  letter-spacing: -0.3px;
+}
+
+.uber-driver-info p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+}
+
+.uber-plate-badge {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+  color: #38bdf8;
+  letter-spacing: 1px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.uber-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px;
+  text-align: center;
+}
+
+.uber-stat-num {
+  font-size: 14px;
+  font-weight: 900;
+  color: #f8fafc;
+}
+
+.uber-stat-sub {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.uber-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* 3D Dark Glass Table Container */
+.drivers-table-wrap-3d {
+  background: linear-gradient(135deg, rgba(19, 24, 36, 0.94) 0%, rgba(15, 18, 28, 0.96) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  perspective: 1000px;
+}
+
+/* 3D Table Element */
+.drivers-3d-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.drivers-3d-table th {
+  background: rgba(30, 41, 59, 0.7);
+  color: #94a3b8;
+  font-weight: 800;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-mono, monospace);
+}
+
+.drivers-3d-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  transition: all 0.25s ease;
+}
+
+.drivers-3d-table tbody tr {
+  transition: all 0.25s ease;
+}
+
+.drivers-3d-table tbody tr:hover td {
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.drivers-3d-table tbody tr:hover {
+  transform: translateY(-2px) scale(1.001);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Driver Avatar Badge */
+.driver-avatar-3d {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00edff, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #0f172a;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 237, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Vehicle 3D Pill */
+.driver-vehicle-pill-3d {
+  background: linear-gradient(135deg, rgba(0, 237, 255, 0.18), rgba(139, 92, 246, 0.12));
+  color: #38bdf8;
+  border: 1px solid rgba(0, 237, 255, 0.35);
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono, monospace);
+  box-shadow: 0 4px 10px rgba(0, 237, 255, 0.15);
+}
+
+/* Availability Status 3D Pills */
+.driver-status-pill-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.driver-status-pill-3d.available {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.driver-status-pill-3d.ontrip {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+}
+
+.driver-status-pill-3d.offline {
+  background: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+/* Account Status 3D Pills */
+.account-badge-3d {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+}
+
+.account-badge-3d.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.account-badge-3d.inactive {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Pagination Bar */
+.drivers-pagination-3d {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: rgba(15, 18, 28, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* 3D Floating Profile Modal */
+.drivers-modal-backdrop-3d {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 13, 24, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+  animation: fadeInDriverModal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInDriverModal {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.drivers-modal-content-3d {
+  background: linear-gradient(135deg, rgba(19, 24, 36, 0.96) 0%, rgba(15, 18, 28, 0.98) 100%);
+  border: 1px solid rgba(0, 237, 255, 0.4);
+  border-radius: 24px;
+  padding: 28px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 237, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.drivers-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drivers-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.drivers-modal-tile {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

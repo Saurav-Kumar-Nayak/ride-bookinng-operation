@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BG Remover</title>
+</head>
+<body style="background: #090d16; color: white;">
+  <canvas id="canvas"></canvas>
+  <script>
+    const img = new Image();
+    img.src = '/ai_robot_3d.png';
+    img.onload = () => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imgData.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+
+        // Dark background / checkerboard pixel detection
+        if (r < 60 && g < 60 && b < 75) {
+          data[i + 3] = 0; // Make 100% transparent
+        }
+      }
+
+      ctx.putImageData(imgData, 0, 0);
+      const dataUrl = canvas.toDataURL('image/png');
+
+      fetch('/api/save-transparent-robot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dataUrl })
+      }).then(r => r.json()).then(res => {
+        document.body.innerHTML = '<h1 id="status">SUCCESS_SAVED_CLEAN_ROBOT</h1>';
+      });
+    };
+  </script>
+</body>
+</html>

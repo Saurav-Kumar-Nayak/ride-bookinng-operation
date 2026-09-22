@@ -12,6 +12,7 @@
     "install-all": "npm install && npm install --prefix frontend"
   },
   "dependencies": {
+    "@clerk/react": "^6.12.10",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

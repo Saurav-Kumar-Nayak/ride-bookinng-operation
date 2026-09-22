@@ -1,0 +1,151 @@
+/* ── UBER-STYLE 3D RIDE HISTORY PAGE STYLES ── */
+
+.rides-page-3d-container {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #090a10;
+  color: #f8fafc;
+  padding-bottom: 110px;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+}
+
+/* 3D Header Banner */
+.rides-hero-3d {
+  background: linear-gradient(145deg, #0d111d 0%, #161b2e 50%, #090b14 100%);
+  padding: 44px 20px 24px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 237, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.rides-hero-glow {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 237, 255, 0.25) 0%, rgba(139, 92, 246, 0.15) 60%, transparent 100%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* 3D Filter Tabs */
+.rides-tabs-wrap-3d {
+  display: flex;
+  gap: 10px;
+  padding: 18px 0;
+  margin-bottom: 8px;
+}
+
+.rides-filter-pill-3d {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 13px;
+  background: rgba(19, 24, 36, 0.85);
+  backdrop-filter: blur(16px);
+  color: #94a3b8;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.rides-filter-pill-3d:hover {
+  color: #f8fafc;
+  border-color: rgba(0, 237, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.rides-filter-pill-3d.active {
+  background: linear-gradient(135deg, #00edff, #3b82f6);
+  color: #0f172a;
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(0, 237, 255, 0.4);
+  transform: scale(1.04);
+}
+
+/* 3D Ride Card Container */
+.ride-card-3d {
+  background: linear-gradient(135deg, rgba(19, 24, 36, 0.94) 0%, rgba(11, 14, 24, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.ride-card-3d:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 25px 45px rgba(0, 237, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-color: rgba(0, 237, 255, 0.4);
+}
+
+/* Status Badges */
+.ride-status-pill-3d {
+  font-size: 11.5px;
+  font-weight: 800;
+  border-radius: 20px;
+  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono, monospace);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ride-status-pill-3d.completed {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.ride-status-pill-3d.cancelled {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* Vehicle Tag */
+.ride-vehicle-tag-3d {
+  font-size: 12px;
+  font-weight: 800;
+  color: #38bdf8;
+  font-family: var(--font-mono, monospace);
+  background: rgba(0, 237, 255, 0.12);
+  border: 1px solid rgba(0, 237, 255, 0.3);
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+/* 3D Telemetry Expanded Drawer */
+.ride-expanded-drawer-3d {
+  padding: 16px 18px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 18, 28, 0.7);
+  animation: fadeInRideDrawer 0.3s ease;
+}
+
+@keyframes fadeInRideDrawer {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ride-stat-tile-3d {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px 14px;
+  flex: 1;
+}

@@ -22,3 +22,13 @@ Thumbs.db
 # Temp / misc
 *.png
 click_feedback_*.png
+frontend - Copy/
+frontend - Copy (2)/
+*.timestamp-*.mjs
+tmp_git_status.txt
+test_driver_module.js
+.mcp.json
+do_push.ps1
+push_to_github.bat
+push_debug.txt
+tmp_push_debug.py

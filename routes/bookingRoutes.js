@@ -7,7 +7,8 @@ const {
   updateBooking,
   deleteBooking,
   seedDb,
-  exportBookings
+  exportBookings,
+  submitRideFeedback
 } = require('../controllers/bookingController');
 
 // Aggregate stats endpoint
@@ -21,6 +22,7 @@ router.get('/', getBookings);
 
 // Direct single records CRUD
 router.post('/', createBooking);
+router.post('/:id/feedback', submitRideFeedback);
 router.put('/:id', updateBooking);
 router.delete('/:id', deleteBooking);
 

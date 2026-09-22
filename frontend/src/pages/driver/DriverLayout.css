@@ -1,0 +1,507 @@
+/* ==========================================================================
+   RIDEX DRIVER CONTROL CENTER - DESIGN SYSTEM & LAYOUT STYLES
+   ========================================================================== */
+
+:root {
+  /* Color Direction */
+  --driver-bg-dark: #070913;
+  --driver-bg-surface: #0c101d;
+  --driver-card-bg: rgba(15, 23, 42, 0.75);
+  --driver-card-glass: rgba(17, 24, 39, 0.65);
+  --driver-card-border: rgba(0, 237, 255, 0.15);
+  --driver-card-border-hover: rgba(0, 237, 255, 0.4);
+  
+  /* Brand & Accent Colors */
+  --driver-primary: #00edff;
+  --driver-primary-glow: rgba(0, 237, 255, 0.35);
+  --driver-secondary: #3b82f6;
+  --driver-secondary-glow: rgba(59, 130, 246, 0.35);
+  
+  /* Status Colors */
+  --driver-success: #10b981;
+  --driver-success-glow: rgba(16, 185, 129, 0.35);
+  --driver-warning: #f59e0b;
+  --driver-warning-glow: rgba(245, 158, 11, 0.35);
+  --driver-danger: #ef4444;
+  --driver-danger-glow: rgba(239, 68, 68, 0.35);
+  
+  /* Typography & Neutral Shades */
+  --driver-text-main: #f8fafc;
+  --driver-text-secondary: #cbd5e1;
+  --driver-text-muted: #64748b;
+  
+  /* Dimensions & Shadows */
+  --driver-sidebar-width: 270px;
+  --driver-header-height: 72px;
+  --driver-shadow-3d: 0 16px 36px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --driver-shadow-glow: 0 0 20px rgba(0, 237, 255, 0.15);
+}
+
+/* Base Container */
+.driver-layout-container {
+  display: flex;
+  min-height: 100vh;
+  background: var(--driver-bg-dark);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 237, 255, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
+  color: var(--driver-text-main);
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Smooth Scrollbars */
+.driver-sidebar::-webkit-scrollbar,
+.driver-nav-menu::-webkit-scrollbar {
+  width: 5px;
+}
+.driver-sidebar::-webkit-scrollbar-thumb,
+.driver-nav-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+.driver-sidebar::-webkit-scrollbar-thumb:hover,
+.driver-nav-menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 237, 255, 0.3);
+}
+
+/* ==========================================================================
+   SIDEBAR COMPONENT
+   ========================================================================== */
+
+.driver-sidebar {
+  width: var(--driver-sidebar-width);
+  background: linear-gradient(180deg, rgba(12, 16, 29, 0.95) 0%, rgba(7, 9, 19, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--driver-card-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Brand Header */
+.driver-sidebar-brand {
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.driver-sidebar-brand:hover {
+  background: rgba(0, 237, 255, 0.05);
+}
+
+.driver-logo-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #00edff 0%, #3b82f6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 0 20px var(--driver-primary-glow), inset 0 2px 4px rgba(255,255,255,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.driver-sidebar-brand:hover .driver-logo-badge {
+  transform: scale(1.06) rotate(-3deg);
+  box-shadow: 0 0 28px var(--driver-primary-glow), inset 0 2px 6px rgba(255,255,255,0.6);
+}
+
+.driver-brand-title {
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  background: linear-gradient(135deg, #ffffff 30%, var(--driver-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.driver-brand-subtitle {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--driver-primary);
+  letter-spacing: 1.8px;
+  font-family: monospace;
+  opacity: 0.9;
+}
+
+/* Driver Profile Card */
+.driver-sidebar-profile {
+  padding: 14px 16px;
+  margin: 16px 16px 8px 16px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+  border: 1px solid var(--driver-card-border);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.driver-sidebar-profile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  transition: left 0.5s ease;
+}
+
+.driver-sidebar-profile:hover::before {
+  left: 100%;
+}
+
+.driver-sidebar-profile:hover {
+  background: rgba(0, 237, 255, 0.08);
+  border-color: var(--driver-primary);
+  box-shadow: 0 8px 24px rgba(0, 237, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.driver-avatar-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 2px solid var(--driver-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
+.driver-online-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  border: 2px solid #0c101d;
+}
+
+.driver-online-dot.online,
+.driver-online-dot.available {
+  background-color: var(--driver-success);
+  box-shadow: 0 0 10px var(--driver-success);
+}
+
+.driver-online-dot.offline {
+  background-color: var(--driver-text-muted);
+}
+
+.driver-online-dot.on-trip,
+.driver-online-dot.on_trip {
+  background-color: var(--driver-warning);
+  box-shadow: 0 0 10px var(--driver-warning);
+}
+
+/* Sidebar Navigation List */
+.driver-nav-menu {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.driver-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  color: var(--driver-text-secondary);
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.driver-nav-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.06);
+  transform: translateX(3px);
+}
+
+.driver-nav-item.active {
+  background: linear-gradient(90deg, rgba(0, 237, 255, 0.14) 0%, rgba(59, 130, 246, 0.08) 100%);
+  border: 1px solid var(--driver-card-border);
+  color: var(--driver-primary);
+  box-shadow: 0 4px 18px rgba(0, 237, 255, 0.1);
+  font-weight: 800;
+}
+
+.driver-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--driver-primary);
+  box-shadow: 0 0 10px var(--driver-primary);
+}
+
+.driver-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.driver-nav-item:hover .driver-nav-icon {
+  transform: scale(1.15);
+}
+
+.driver-nav-badge {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 900;
+  background: var(--driver-primary);
+  color: #070913;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 8px var(--driver-primary-glow);
+}
+
+.driver-nav-badge.warning {
+  background: var(--driver-warning);
+  color: #070913;
+  box-shadow: 0 2px 8px var(--driver-warning-glow);
+}
+
+/* Sidebar Footer & Logout */
+.driver-sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(7, 9, 19, 0.4);
+}
+
+.driver-logout-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 14px;
+  color: #ef4444;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.driver-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   MAIN WRAPPER & TOP HEADER
+   ========================================================================== */
+
+.driver-main-wrapper {
+  flex: 1;
+  margin-left: var(--driver-sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: calc(100% - var(--driver-sidebar-width));
+}
+
+.driver-header {
+  height: var(--driver-header-height);
+  background: rgba(12, 16, 29, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--driver-card-border);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.driver-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.driver-page-title {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--driver-text-main);
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.driver-header-subtitle {
+  font-size: 12px;
+  color: var(--driver-text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.driver-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Status Toggle Pill */
+.driver-status-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--driver-card-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.driver-status-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--driver-text-muted);
+  letter-spacing: 0.8px;
+}
+
+.driver-toggle-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.driver-toggle-btn.available,
+.driver-toggle-btn.online {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.45);
+}
+
+.driver-toggle-btn.available:hover {
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.6);
+  transform: scale(1.03);
+}
+
+.driver-toggle-btn.offline {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--driver-text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.driver-toggle-btn.offline:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--driver-text-main);
+}
+
+.driver-toggle-btn.on-trip,
+.driver-toggle-btn.on_trip {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  cursor: default;
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.45);
+}
+
+/* Quick Action / Notification Bell in Header */
+.driver-header-icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--driver-card-border);
+  color: var(--driver-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.driver-header-icon-btn:hover {
+  background: rgba(0, 237, 255, 0.1);
+  border-color: var(--driver-primary);
+  color: var(--driver-primary);
+  transform: translateY(-1px);
+}
+
+/* Page Content Container */
+.driver-page-content {
+  padding: 30px 32px;
+  flex: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .driver-sidebar {
+    transform: translateX(-100%);
+  }
+  .driver-sidebar.open {
+    transform: translateX(0);
+  }
+  .driver-main-wrapper {
+    margin-left: 0;
+    width: 100%;
+  }
+  .driver-header {
+    padding: 0 20px;
+  }
+  .driver-page-content {
+    padding: 20px;
+  }
+}

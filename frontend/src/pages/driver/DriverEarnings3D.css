@@ -1,0 +1,239 @@
+/* ==========================================================================
+   RIDEX 3D REALISTIC DRIVER EARNINGS & ANALYTICS - SYSTEM STYLES
+   ========================================================================== */
+
+/* Perspective Container */
+.driver-3d-perspective {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+/* 3D Interactive Tilt Card */
+.tilt-3d-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(13, 25, 40, 0.85) 0%, rgba(7, 14, 25, 0.95) 100%);
+  border: 1px solid rgba(0, 237, 255, 0.18);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform-style: preserve-3d;
+  transition: transform 0.15s cubic-bezier(0.1, 0.9, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 
+    0 16px 36px -10px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.tilt-3d-card:hover {
+  border-color: rgba(0, 237, 255, 0.5);
+  box-shadow: 
+    0 24px 48px -12px rgba(0, 237, 255, 0.22),
+    0 0 30px rgba(0, 237, 255, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Dynamic Gloss Overlay */
+.tilt-3d-gloss {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border-radius: 18px;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(0, 237, 255, 0.05) 40%,
+    transparent 80%
+  );
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+/* 3D Extruded Bar / Cuboid Elements */
+.cuboid-bar-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cuboid-bar-container:hover {
+  transform: translateY(-8px) scale(1.05) translateZ(20px);
+}
+
+/* 3D Bar Front Face */
+.cuboid-front {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* 3D Bar Top Facet */
+.cuboid-top {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-radius: 3px 3px 0 0;
+  transform: skewX(-30deg) translateY(-2px);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 -2px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* 3D Bar Side Facet */
+.cuboid-side {
+  position: absolute;
+  right: -5px;
+  top: -3px;
+  bottom: 0;
+  width: 5px;
+  transform: skewY(-60deg);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Animated 3D Ring Progress */
+.availability-3d-ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.6),
+    inset 0 0 15px rgba(16, 185, 129, 0.3);
+  transform: rotateX(20deg) rotateY(-10deg);
+  transform-style: preserve-3d;
+}
+
+.availability-3d-ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.6), transparent 70%);
+  filter: blur(8px);
+  z-index: -1;
+}
+
+/* Glowing Metallic Pill Selector */
+.pill-3d-btn {
+  padding: 7px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 237, 255, 0.2);
+  background: linear-gradient(180deg, rgba(20, 35, 55, 0.8) 0%, rgba(10, 20, 35, 0.9) 100%);
+  color: #94a3b8;
+  font-weight: 700;
+  font-size: 12.5px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.pill-3d-btn:hover {
+  color: #ffffff;
+  border-color: rgba(0, 237, 255, 0.6);
+  transform: translateY(-2px) translateZ(5px);
+  box-shadow: 0 8px 18px rgba(0, 237, 255, 0.25);
+}
+
+.pill-3d-btn.active {
+  background: linear-gradient(135deg, #00edff 0%, #2f80ed 100%);
+  color: #070913;
+  border-color: #00edff;
+  font-weight: 900;
+  box-shadow: 0 0 20px rgba(0, 237, 255, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px) translateZ(10px);
+}
+
+/* 3D Glass Modal Overlay */
+.modal-3d-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 8, 16, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-3d-content {
+  background: linear-gradient(145deg, rgba(15, 26, 44, 0.95) 0%, rgba(8, 16, 28, 0.98) 100%);
+  border: 1px solid rgba(0, 237, 255, 0.4);
+  border-radius: 22px;
+  padding: 28px;
+  width: 90%;
+  max-width: 520px;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(0, 237, 255, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  transform: perspective(1000px) rotateX(4deg);
+  animation: scaleUp3D 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp3D {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(15deg) scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(4deg) scale(1) translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 237, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 237, 255, 0.7);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+/* Floating 3D Sparkle / Icon Halo */
+.icon-3d-badge {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.icon-3d-badge:hover {
+  transform: translateZ(20px) scale(1.1) rotate(5deg);
+}
+
+/* Responsive Grid Tweaks */
+@media (max-width: 768px) {
+  .modal-3d-content {
+    padding: 20px;
+  }
+}

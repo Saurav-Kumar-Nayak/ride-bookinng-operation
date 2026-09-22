@@ -1,0 +1,790 @@
+/* ── RIDEX ADMIN SETTINGS — UBER-INSPIRED ENTERPRISE CONSOLE ── */
+
+.uber-admin-settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+  animation: uberFadeIn 0.3s ease-out;
+}
+
+:global(.dark-theme) .uber-admin-settings-container,
+body.dark-theme .uber-admin-settings-container {
+  color: #f8fafc;
+}
+
+@keyframes uberFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HEADER STYLING ── */
+.uber-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.header-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.uber-settings-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: inherit;
+}
+
+.uber-status-pill {
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--font-mono, monospace);
+}
+
+:global(.dark-theme) .uber-status-pill,
+body.dark-theme .uber-status-pill {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.uber-settings-subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+:global(.dark-theme) .uber-settings-subtitle,
+body.dark-theme .uber-settings-subtitle {
+  color: #94a3b8;
+}
+
+/* ── ALERT BANNER ── */
+.uber-alert-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  position: relative;
+  animation: bannerSlide 0.25s ease-out;
+}
+
+@keyframes bannerSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.uber-alert-banner.success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+:global(.dark-theme) .uber-alert-banner.success,
+body.dark-theme .uber-alert-banner.success {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}
+
+.uber-alert-banner.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+:global(.dark-theme) .uber-alert-banner.error,
+body.dark-theme .uber-alert-banner.error {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.uber-alert-banner.info {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+}
+
+:global(.dark-theme) .uber-alert-banner.info,
+body.dark-theme .uber-alert-banner.info {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+}
+
+.alert-icon { font-size: 14px; font-weight: 900; }
+.alert-text { flex: 1; }
+.alert-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+}
+.alert-close-btn:hover { opacity: 1; }
+
+/* ── MAIN 2-COLUMN GRID ── */
+.uber-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* ── UBER CARDS ── */
+.uber-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:global(.dark-theme) .uber-card,
+body.dark-theme .uber-card {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.uber-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+:global(.dark-theme) .uber-card:hover,
+body.dark-theme .uber-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.full-width-card {
+  grid-column: 1 / -1;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Card Header */
+.uber-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 20px;
+}
+
+:global(.dark-theme) .uber-card-header,
+body.dark-theme .uber-card-header {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.uber-card-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+:global(.dark-theme) .uber-card-icon-box,
+body.dark-theme .uber-card-icon-box {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.uber-card-icon-box.green {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+:global(.dark-theme) .uber-card-icon-box.green,
+body.dark-theme .uber-card-icon-box.green {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.uber-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: inherit;
+}
+
+.uber-card-desc {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+:global(.dark-theme) .uber-card-desc,
+body.dark-theme .uber-card-desc {
+  color: #94a3b8;
+}
+
+/* ── PASSCODE VAULT PANEL ── */
+.passcode-vault-panel {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+:global(.dark-theme) .passcode-vault-panel,
+body.dark-theme .passcode-vault-panel {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.vault-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: #64748b;
+  font-family: var(--font-mono, monospace);
+  display: block;
+}
+
+:global(.dark-theme) .vault-label,
+body.dark-theme .vault-label { color: #94a3b8; }
+
+.vault-value {
+  font-size: 22px;
+  font-weight: 900;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 4px;
+  color: #0f172a;
+  margin-top: 2px;
+}
+
+:global(.dark-theme) .vault-value,
+body.dark-theme .vault-value { color: #38bdf8; }
+
+/* ── FORMS & INPUTS ── */
+.passcode-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+}
+
+:global(.dark-theme) .form-label,
+body.dark-theme .form-label { color: #cbd5e1; }
+
+.input-with-counter {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.uber-input {
+  width: 100%;
+  padding: 12px 14px;
+  padding-right: 60px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: var(--font-mono, monospace);
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:global(.dark-theme) .uber-input,
+body.dark-theme .uber-input {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+}
+
+.uber-input:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+}
+
+:global(.dark-theme) .uber-input:focus,
+body.dark-theme .uber-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.uber-input.input-error {
+  border-color: #ef4444 !important;
+}
+
+.digit-counter {
+  position: absolute;
+  right: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+  pointer-events: none;
+}
+
+.field-error-text {
+  font-size: 11.5px;
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* ── BUTTONS ── */
+.uber-btn-primary {
+  background: #0f172a;
+  color: #ffffff;
+  border: 1px solid #0f172a;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+:global(.dark-theme) .uber-btn-primary,
+body.dark-theme .uber-btn-primary {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #f8fafc;
+}
+
+.uber-btn-primary:hover:not(:disabled) {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+:global(.dark-theme) .uber-btn-primary:hover:not(:disabled),
+body.dark-theme .uber-btn-primary:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.uber-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.uber-btn-secondary {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+:global(.dark-theme) .uber-btn-secondary,
+body.dark-theme .uber-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.uber-btn-secondary:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+:global(.dark-theme) .uber-btn-secondary:hover:not(:disabled),
+body.dark-theme .uber-btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.uber-btn-outline {
+  background: transparent;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+:global(.dark-theme) .uber-btn-outline,
+body.dark-theme .uber-btn-outline {
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.uber-btn-outline:hover {
+  border-color: #0f172a;
+  background: #f8fafc;
+}
+
+:global(.dark-theme) .uber-btn-outline:hover,
+body.dark-theme .uber-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.uber-btn-outline.sm {
+  padding: 6px 12px;
+  font-size: 11.5px;
+}
+
+.uber-btn-text {
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+:global(.dark-theme) .uber-btn-text,
+body.dark-theme .uber-btn-text {
+  color: #38bdf8;
+}
+
+.uber-btn-text:hover { text-decoration: underline; }
+
+.uber-btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+  border: 1px solid #dc2626;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.uber-btn-danger:hover { background: #b91c1c; }
+
+.full-width { width: 100%; }
+
+/* ── SEEDER ENGINE CARDS ── */
+.seeder-warning-text {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+:global(.dark-theme) .seeder-warning-text,
+body.dark-theme .seeder-warning-text { color: #94a3b8; }
+
+.seeder-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.seeder-action-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+:global(.dark-theme) .seeder-action-card,
+body.dark-theme .seeder-action-card {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.seeder-badge {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #475569;
+  background: #e2e8f0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+:global(.dark-theme) .seeder-badge,
+body.dark-theme .seeder-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+.seeder-badge.dark {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+:global(.dark-theme) .seeder-badge.dark,
+body.dark-theme .seeder-badge.dark {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.seeder-count {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: inherit;
+}
+
+.seeder-desc {
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+:global(.dark-theme) .seeder-desc,
+body.dark-theme .seeder-desc { color: #94a3b8; }
+
+/* ── SYSTEM HEALTH CARDS ── */
+.health-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.health-service-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+:global(.dark-theme) .health-service-card,
+body.dark-theme .health-service-card {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.health-service-card.ok {
+  border-left: 4px solid #10b981;
+}
+
+.health-service-card.error {
+  border-left: 4px solid #ef4444;
+}
+
+.service-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-green {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseDot 2s infinite;
+}
+
+.dot-red {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.service-latency {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  color: #64748b;
+}
+
+:global(.dark-theme) .service-latency,
+body.dark-theme .service-latency { color: #94a3b8; }
+
+.service-name {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+}
+
+.service-status-text {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+:global(.dark-theme) .service-status-text,
+body.dark-theme .service-status-text { color: #f8fafc; }
+
+.service-state-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.health-service-card.error .service-state-sub {
+  color: #ef4444;
+}
+
+/* ── CONFIRMATION MODAL ── */
+.uber-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+}
+
+.uber-modal-box {
+  background: #ffffff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 440px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:global(.dark-theme) .uber-modal-box,
+body.dark-theme .uber-modal-box {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.modal-body {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+:global(.dark-theme) .modal-body,
+body.dark-theme .modal-body { color: #cbd5e1; }
+
+.modal-warning-box {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: #991b1b;
+  margin-top: 12px;
+}
+
+:global(.dark-theme) .modal-warning-box,
+body.dark-theme .modal-warning-box {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 640px) {
+  .seeder-actions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .uber-settings-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

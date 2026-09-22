@@ -1,0 +1,328 @@
+/* RideX Production-Grade Ride Progress Timeline Styles */
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4), 0 0 12px rgba(16, 185, 129, 0.3);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0), 0 0 20px rgba(16, 185, 129, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0), 0 0 12px rgba(16, 185, 129, 0.3);
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+@keyframes connectorFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 200%;
+  }
+}
+
+.ridex-progress-card {
+  background: rgba(14, 18, 28, 0.92);
+  border: 1.5px solid rgba(0, 237, 255, 0.25);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.ridex-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ridex-progress-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ridex-progress-heading {
+  font-size: 13px;
+  font-weight: 900;
+  color: #94a3b8;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.ridex-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 4px 12px;
+  border-radius: 999px;
+  color: #34d399;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.ridex-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseDot 1.8s infinite ease-in-out;
+}
+
+.ridex-timeline-list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 0;
+}
+
+.ridex-timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.ridex-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.ridex-timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.ridex-timeline-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.ridex-timeline-circle.completed {
+  background: #10b981;
+  border: 1px solid #10b981;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+.ridex-timeline-circle.active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: 2px solid #34d399;
+  color: #ffffff;
+  animation: pulseGlow 2s infinite;
+}
+
+.ridex-timeline-circle.upcoming {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  color: #64748b;
+}
+
+.ridex-connector-line {
+  position: absolute;
+  top: 36px;
+  left: 17px;
+  bottom: 0;
+  width: 2.5px;
+  z-index: 1;
+  transform: translateX(-50%);
+}
+
+.ridex-connector-line.completed {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.ridex-connector-line.active {
+  background: linear-gradient(180deg, #10b981 0%, rgba(16, 185, 129, 0.2) 100%);
+  background-size: 100% 200%;
+  animation: connectorFlow 2s linear infinite;
+}
+
+.ridex-connector-line.upcoming {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ridex-timeline-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 6px;
+}
+
+.ridex-timeline-title {
+  font-size: 14px;
+  line-height: 1.2;
+  margin-bottom: 3px;
+  transition: color 0.2s ease;
+}
+
+.ridex-timeline-title.completed {
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.ridex-timeline-title.active {
+  font-weight: 900;
+  color: #10b981;
+  letter-spacing: 0.3px;
+}
+
+.ridex-timeline-title.upcoming {
+  font-weight: 600;
+  color: #64748b;
+}
+
+.ridex-timeline-desc {
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.ridex-timeline-desc.completed {
+  color: #94a3b8;
+}
+
+.ridex-timeline-desc.active {
+  color: #34d399;
+  font-weight: 600;
+}
+
+.ridex-timeline-desc.upcoming {
+  color: #475569;
+}
+
+.ridex-timeline-meta {
+  padding-top: 6px;
+  text-align: right;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ridex-timeline-meta.completed {
+  color: #34d399;
+}
+
+.ridex-timeline-meta.active {
+  color: #10b981;
+  font-weight: 900;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.ridex-timeline-meta.upcoming {
+  color: #475569;
+}
+
+/* Production Primary CTA Button */
+.ridex-cta-button {
+  width: 100%;
+  height: 54px;
+  border-radius: 16px;
+  border: none;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.ridex-cta-button.accepted {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.ridex-cta-button.arriving {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.ridex-cta-button.arrived {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.ridex-cta-button.started {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+}
+
+.ridex-cta-button.completed {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3);
+  cursor: default;
+}
+
+.ridex-cta-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.ridex-cta-button:active:not(:disabled) {
+  transform: translateY(1px);
+  filter: brightness(0.95);
+}
+
+.ridex-cta-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .ridex-progress-card {
+    padding: 16px;
+  }
+  .ridex-timeline-item {
+    gap: 12px;
+  }
+  .ridex-timeline-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  .ridex-connector-line {
+    top: 32px;
+    left: 15px;
+  }
+}
